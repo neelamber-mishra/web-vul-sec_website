@@ -2,24 +2,16 @@ import requests
 from bs4 import BeautifulSoup
 
 def crawl_directories(url):
-    """
-    Crawls the given URL and extracts links for further exploration.
     
-    Args:
-        url (str): The target URL to crawl.
-    
-    Returns:
-        str: Summary of the crawling results.
-    """
     try:
-        # Send GET request to the URL
+        
         response = requests.get(url, timeout=10)
-        response.raise_for_status()  # Raise an error for HTTP codes 4xx/5xx
+        response.raise_for_status()  
 
-        # Parse the HTML content
+        
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        # Find all links on the page
+       
         links = [a.get('href') for a in soup.find_all('a', href=True)]
         absolute_links = [link if link.startswith('http') else f"{url.rstrip('/')}/{link.lstrip('/')}" for link in links]
 
