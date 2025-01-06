@@ -1,19 +1,23 @@
+import re
 import requests
-from bs4 import BeautifulSoup
 
 def crawl_directories(url):
-    
+   
     try:
         
         response = requests.get(url, timeout=10)
         response.raise_for_status()  
 
         
-        soup = BeautifulSoup(response.text, 'html.parser')
+        html_content = response.text
+        link_pattern = r'href=["\'](.*?)["\']'
+        links = re.findall(link_pattern, html_content)
 
-       
-        links = [a.get('href') for a in soup.find_all('a', href=True)]
-        absolute_links = [link if link.startswith('http') else f"{url.rstrip('/')}/{link.lstrip('/')}" for link in links]
+        
+        absolute_links = [
+            link if link.startswith(('http://', 'https://')) else f"{url.rstrip('/')}/{link.lstrip('/')}"
+            for link in links
+        ]
 
         return f"Successfully crawled {url} with {len(absolute_links)} links found:\n" + "\n".join(absolute_links)
 
@@ -23,7 +27,7 @@ def crawl_directories(url):
 if __name__ == "__main__":
     import sys
     if len(sys.argv) != 2:
-        print("Usage: python crawl_script.py <url>")
+        print("Usage: python crawl_script_no_bs4.py <url>")
         sys.exit(1)
 
     target_url = sys.argv[1]
