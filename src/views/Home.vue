@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Web Vulnerability Tools</h1>
+    <h2> attacks <h2>
     <ul>
       <li><router-link to="/crawl">Crawl Directories</router-link></li>
       <li><router-link to="/brute-force">Brute Force</router-link></li>
