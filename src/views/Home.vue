@@ -16,5 +16,4 @@
 </script>
 
 <style scoped>
-/* You can keep your CSS from style.css or add here */
 </style>
