@@ -38,6 +38,5 @@ const submitForm = () => {
     username: username.value,
     passwordFile: passwordFile.value,
   });
-  // Send it to backend
 };
 </script>
