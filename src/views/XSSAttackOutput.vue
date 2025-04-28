@@ -17,5 +17,4 @@ const summary = ref("XSS Attack results will be displayed here.");
 </script>
 
 <style scoped>
-/* Optional: Your scoped CSS if needed */
 </style>
